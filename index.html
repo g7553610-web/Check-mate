@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CheckMate | Chess Game Analyser</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Chessboard.js CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css"
+    >
+    
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= LOGIN OVERLAY ================= -->
+
+    <div id="auth-overlay" class="auth-overlay">
+
+        <div class="auth-card">
+
+            <div class="auth-crest">♔</div>
+
+            <h1 class="auth-title">CHECKMATE <span>AI</span></h1>
+            <p class="auth-subtitle">Sign in to save your analysis history</p>
+
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" data-tab="login">Sign In</button>
+                <button type="button" class="auth-tab" data-tab="signup">Create Account</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="auth-form" novalidate>
+
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" autocomplete="email" required>
+
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" autocomplete="current-password" required>
+
+                <p id="login-error" class="auth-error" role="alert"></p>
+
+                <button type="submit" class="auth-submit">SIGN IN</button>
+
+                <button type="button" class="auth-guest" id="guest-btn">Continue as Guest</button>
+
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signup-form" class="auth-form hidden" novalidate>
+
+                <label for="signup-name">Display Name</label>
+                <input type="text" id="signup-name" autocomplete="name" required>
+
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" autocomplete="email" required>
+
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" autocomplete="new-password" minlength="6" required>
+
+                <p id="signup-error" class="auth-error" role="alert"></p>
+
+                <button type="submit" class="auth-submit">CREATE ACCOUNT</button>
+
+            </form>
+
+            <p class="auth-note">
+                Accounts are stored locally in this browser. No data leaves your device.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ♔ <span>CHECKMATE</span> 
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#analyser">Analyser</a>
+            <a href="#history">History</a>
+            <a href="#about">About</a>
+        </div>
+
+        <div class="nav-account">
+            <span id="nav-username">Guest</span>
+            <button id="logout-btn" class="logout-btn">LOG OUT</button>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HOME ================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="tagline">
+                ♟ ANALYSE • IMPROVE • DOMINATE ♟
+            </p>
+
+            <h1>
+                MASTER
+                <span>YOUR GAME</span>
+            </h1>
+
+            <p class="hero-text">
+                Every move tells a story. Discover your mistakes,
+                analyse your games and improve your chess strategy.
+            </p>
+
+            <div class="username-box">
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your Chess.com username"
+                >
+
+                <button id="fetch-games-btn">
+                    ANALYSE GAMES
+                </button>
+
+            </div>
+
+            <p id="status"></p>
+
+        </div>
+
+        <div class="chess-decoration">
+
+            <span>♜</span>
+            <span>♞</span>
+            <span>♝</span>
+            <span>♛</span>
+            <span>♚</span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= GAMES SECTION ================= -->
+
+    <section id="games-section" class="games-section hidden">
+
+        <h2>
+            YOUR <span>GAMES</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Select a game to begin your analysis
+        </p>
+
+        <div id="games-container"
+             class="games-container">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ANALYSER ================= -->
+
+    <section id="analyser"
+             class="analyser-section hidden">
+
+        <h2>
+            GAME <span>ANALYSIS</span>
+        </h2>
+
+        <div class="analysis-layout">
+
+            <!-- LEFT SIDE -->
+
+            <div class="board-area">
+
+                <div id="board"></div>
+
+                <div class="board-controls">
+
+                    <button id="btn-start">
+                        ⏮ START
+                    </button>
+
+                    <button id="btn-prev">
+                        ◀ PREVIOUS
+                    </button>
+
+                    <button id="btn-next">
+                        NEXT ▶
+                    </button>
+
+                    <button id="btn-end">
+                        END ⏭
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="analysis-panel">
+
+                <!-- EVAL BAR -->
+
+                <div class="eval-bar-wrap">
+
+                    <div class="eval-bar">
+                        <div id="eval-fill" class="eval-fill"></div>
+                        <div class="eval-mid"></div>
+                    </div>
+
+                    <div id="eval-score" class="eval-score">0.0</div>
+
+                </div>
+
+
+                <!-- GAME DETAILS -->
+
+                <div class="game-info">
+
+                    <h3>GAME DETAILS</h3>
+
+                    <p>
+                        <span>White:</span>
+                        <strong id="white-player">-</strong>
+                    </p>
+
+                    <p>
+                        <span>Black:</span>
+                        <strong id="black-player">-</strong>
+                    </p>
+
+                    <p>
+                        <span>Result:</span>
+                        <strong id="game-result">-</strong>
+                    </p>
+
+                    <p>
+                        <span>Time Control:</span>
+                        <strong id="time-control">-</strong>
+                    </p>
+
+                </div>
+
+
+                <!-- ACCURACY SUMMARY -->
+
+                <div class="accuracy-summary">
+
+                    <div class="accuracy-row">
+                        <span class="acc-label">White accuracy</span>
+                        <strong id="white-accuracy" class="acc-value">-</strong>
+                    </div>
+
+                    <div class="accuracy-row">
+                        <span class="acc-label">Black accuracy</span>
+                        <strong id="black-accuracy" class="acc-value">-</strong>
+                    </div>
+
+                    <div id="classification-counts" class="classification-counts"></div>
+
+                </div>
+
+
+                <!-- CURRENT MOVE -->
+
+                <div class="current-move">
+
+                    <h3>CURRENT MOVE</h3>
+
+                    <div id="move-display">
+                        Start Position
+                    </div>
+
+                    <div id="move-tag" class="move-tag"></div>
+
+                </div>
+
+
+                <!-- MOVE HISTORY -->
+
+                <div class="move-history">
+
+                    <h3>MOVE HISTORY</h3>
+
+                    <div id="moves-list">
+                    </div>
+
+                </div>
+
+
+                <!-- SHARE / DOWNLOAD -->
+
+                <div class="share-actions">
+
+                    <button type="button" id="share-btn" class="share-btn">
+                        🔗 SHARE GAME
+                    </button>
+
+                    <button type="button" id="download-btn" class="download-btn">
+                        ⬇ DOWNLOAD PGN
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= SAVED HISTORY ================= -->
+
+    <section id="history" class="history-section">
+
+        <h2>
+            ANALYSIS <span>HISTORY</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Games you've previously analysed, saved to your account
+        </p>
+
+        <div id="history-empty" class="history-empty">
+            No saved analyses yet. Analyse a game above to add it here.
+        </div>
+
+        <div id="history-container" class="games-container">
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about" class="about-section">
+
+        <h2>
+            ABOUT <span>CHECKMATE AI</span>
+        </h2>
+
+        <p>
+            CheckMate AI is a chess game analysis platform designed
+            to help players review their games, understand their moves
+            and improve their chess performance.
+        </p>
+
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">♟</div>
+
+                <h3>ANALYSE</h3>
+
+                <p>
+                    Review your Chess.com games move by move.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📊</div>
+
+                <h3>IMPROVE</h3>
+
+                <p>
+                    Understand your games and identify areas
+                    for improvement.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🏆</div>
+
+                <h3>DOMINATE</h3>
+
+                <p>
+                    Learn from every game and become a
+                    stronger chess player.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            ♔ CHECKMATE AI
+        </div>
+
+        <p>
+            Analyse. Improve. Dominate.
+        </p>
+
+        <p class="copyright">
+            © 2026 CheckMate AI | Chess Game Analyser
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT LIBRARIES ================= -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1630 @@
+/* =========================================
+   CHECKMATE AI
+   LUXURY BLACK & GOLD CHESS THEME
+========================================= */
+
+
+/* ================= ROOT ================= */
+
+:root {
+
+    --black: #070707;
+    --dark: #111111;
+    --dark-card: #181818;
+
+    --gold: #d4af37;
+    --light-gold: #f5d76e;
+    --gold-dark: #9c7c20;
+
+    --white: #f5f5f5;
+    --grey: #a5a5a5;
+
+    --brilliant: #26c2a3;
+    --great: #5b8bff;
+    --best: #95bb4a;
+    --good: #7d8a97;
+    --inaccuracy: #f7c631;
+    --miss: #ff8c42;
+    --blunder: #ff4d4d;
+
+}
+
+
+/* ================= RESET ================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* The move history gets its own scroll container so the
+   page never glides when a chip is highlighted/focused. */
+#moves-list {
+    scroll-behavior: auto;
+}
+
+
+body {
+
+    background: var(--black);
+
+    color: var(--white);
+
+    font-family: "Poppins", sans-serif;
+
+}
+
+
+body.auth-locked {
+
+    overflow: hidden;
+
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 8%;
+
+    background: #0c0c0c;
+
+    border-bottom: 1px solid var(--gold-dark);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+}
+
+
+.logo {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 22px;
+
+    color: var(--gold);
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+.logo span {
+
+    color: var(--white);
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    gap: 30px;
+
+}
+
+
+.nav-links a {
+
+    text-decoration: none;
+
+    color: var(--grey);
+
+    transition: 0.3s;
+
+}
+
+
+.nav-links a:hover {
+
+    color: var(--gold);
+
+}
+
+
+/* ================= NAV ACCOUNT ================= */
+
+.nav-account {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+#nav-username {
+
+    font-size: 13px;
+
+    color: var(--grey);
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.logout-btn {
+
+    padding: 9px 16px;
+
+    font-size: 11px;
+
+    background: transparent;
+
+    border: 1px solid var(--gold-dark);
+
+    color: var(--gold);
+
+}
+
+
+.logout-btn:hover {
+
+    background: var(--gold);
+
+    color: black;
+
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #1a1607,
+            #070707 65%
+        );
+
+}
+
+
+.hero-content {
+
+    max-width: 850px;
+
+}
+
+
+.tagline {
+
+    color: var(--gold);
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+
+}
+
+
+.hero h1 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 75px;
+
+    line-height: 1.1;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero h1 span {
+
+    color: var(--gold);
+
+    display: block;
+
+}
+
+
+.hero-text {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    color: var(--grey);
+
+    line-height: 1.8;
+
+    margin-bottom: 40px;
+
+}
+
+
+/* ================= USERNAME BOX ================= */
+
+.username-box {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.username-box input {
+
+    width: 320px;
+
+    padding: 16px;
+
+    background: #111;
+
+    border: 1px solid var(--gold-dark);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
+
+}
+
+
+.username-box input:focus {
+
+    border-color: var(--gold);
+
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+
+}
+
+
+button {
+
+    padding: 15px 25px;
+
+    border: 1px solid var(--gold);
+
+    background: var(--gold);
+
+    color: black;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    letter-spacing: 1px;
+
+}
+
+
+button:hover {
+
+    background: transparent;
+
+    color: var(--gold);
+
+}
+
+
+#status {
+
+    margin-top: 20px;
+
+    color: var(--gold);
+
+}
+
+
+/* ================= CHESS DECORATION ================= */
+
+.chess-decoration {
+
+    margin-top: 60px;
+
+    display: flex;
+
+    gap: 30px;
+
+    color: var(--gold);
+
+    font-size: 50px;
+
+    opacity: 0.8;
+
+}
+
+
+/* ================= SECTION ================= */
+
+.games-section,
+.analyser-section,
+.about-section {
+
+    padding: 90px 8%;
+
+    text-align: center;
+
+}
+
+
+h2 {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 40px;
+
+    margin-bottom: 15px;
+
+}
+
+
+h2 span {
+
+    color: var(--gold);
+
+}
+
+
+.section-subtitle {
+
+    color: var(--grey);
+
+    margin-bottom: 40px;
+
+}
+
+
+/* ================= GAMES ================= */
+
+.games-container {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
+
+    gap: 25px;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+}
+
+
+.game-card {
+
+    background: var(--dark-card);
+
+    border: 1px solid #292929;
+
+    padding: 25px;
+
+    text-align: left;
+
+    transition: 0.3s;
+
+    position: relative;
+
+}
+
+
+.game-card:hover {
+
+    transform: translateY(-7px);
+
+    border-color: var(--gold);
+
+}
+
+
+.game-card h3 {
+
+    font-family: "Cinzel", serif;
+
+    color: var(--gold);
+
+    margin-bottom: 15px;
+
+}
+
+
+.game-card p {
+
+    color: var(--grey);
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+}
+
+
+.game-card button {
+
+    margin-top: 15px;
+
+    width: 100%;
+
+}
+
+
+/* ================= ANALYSER ================= */
+
+.analysis-layout {
+
+    display: grid;
+
+    grid-template-columns:
+
+        1fr
+        400px;
+
+    gap: 50px;
+
+    max-width: 1300px;
+
+    margin: 50px auto;
+
+    text-align: left;
+
+}
+
+
+.board-area {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+#board {
+
+    width: 100%;
+
+    max-width: 600px;
+
+}
+
+
+/* ================= BOARD CONTROLS ================= */
+
+.board-controls {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-top: 25px;
+
+}
+
+
+.board-controls button {
+
+    font-size: 12px;
+
+}
+
+
+/* ================= ANALYSIS PANEL ================= */
+
+.analysis-panel {
+
+    background: var(--dark-card);
+
+    border: 1px solid #292929;
+
+    padding: 25px;
+
+}
+
+
+.analysis-panel h3 {
+
+    font-family: "Cinzel", serif;
+
+    color: var(--gold);
+
+    margin-bottom: 20px;
+
+}
+
+
+.game-info {
+
+    border-bottom: 1px solid #333;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.game-info p {
+
+    margin-bottom: 10px;
+
+    color: var(--grey);
+
+}
+
+
+.game-info span {
+
+    color: var(--white);
+
+}
+
+
+/* ================= EVAL BAR ================= */
+
+.eval-bar-wrap {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.eval-bar {
+
+    position: relative;
+
+    width: 20px;
+
+    height: 200px;
+
+    background: #2b2b2b;
+
+    border: 1px solid #333;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+}
+
+
+.eval-fill {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 50%;
+
+    background: var(--white);
+
+    transition: height 0.25s ease;
+
+}
+
+
+.eval-mid {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 1px;
+
+    background: var(--gold);
+
+    z-index: 2;
+
+}
+
+
+.eval-score {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 20px;
+
+    color: var(--white);
+
+}
+
+
+/* ================= ACCURACY SUMMARY ================= */
+
+.accuracy-summary {
+
+    border-bottom: 1px solid #333;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.accuracy-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+}
+
+
+.acc-label {
+
+    color: var(--grey);
+
+}
+
+
+.acc-value {
+
+    color: var(--gold);
+
+    font-family: "Cinzel", serif;
+
+    font-size: 16px;
+
+}
+
+
+.classification-counts {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 14px;
+
+}
+
+
+/* ================= CLASS CHIPS ================= */
+
+.class-chip {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 4px 9px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    border-radius: 3px;
+
+    border: 1px solid transparent;
+
+    background: #0b0b0b;
+
+    color: var(--white);
+
+    white-space: nowrap;
+
+}
+
+
+.class-chip .chip-icon {
+
+    font-family: monospace;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+}
+
+
+.class-chip .chip-count {
+
+    opacity: 0.75;
+
+    margin-left: 2px;
+
+}
+
+
+.class-brilliant  { color: var(--brilliant);  border-color: var(--brilliant); }
+.class-great      { color: var(--great);      border-color: var(--great); }
+.class-best       { color: var(--best);       border-color: var(--best); }
+.class-good       { color: var(--good);       border-color: var(--good); }
+.class-inaccuracy { color: var(--inaccuracy); border-color: var(--inaccuracy); }
+.class-miss       { color: var(--miss);       border-color: var(--miss); }
+.class-blunder    { color: var(--blunder);    border-color: var(--blunder); }
+
+
+/* ================= CURRENT MOVE ================= */
+
+.current-move {
+
+    border-bottom: 1px solid #333;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+#move-display {
+
+    background: #0b0b0b;
+
+    padding: 15px;
+
+    border-left: 3px solid var(--gold);
+
+    color: var(--gold);
+
+}
+
+
+.move-tag {
+
+    margin-top: 12px;
+
+    min-height: 22px;
+
+}
+
+
+/* ================= MOVE HISTORY ================= */
+
+#moves-list {
+
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+.move-item {
+
+    padding: 7px 10px;
+
+    background: #0b0b0b;
+
+    border: 1px solid #333;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.move-item:hover {
+
+    border-color: var(--gold);
+
+}
+
+
+.move-item.active {
+
+    border-color: var(--gold);
+
+    color: var(--gold);
+
+}
+
+
+/* Per-tag left border colours on move chips */
+
+.move-item.tag-brilliant  { border-left: 3px solid var(--brilliant); }
+.move-item.tag-great      { border-left: 3px solid var(--great); }
+.move-item.tag-best       { border-left: 3px solid var(--best); }
+.move-item.tag-good       { border-left: 3px solid var(--good); }
+.move-item.tag-inaccuracy { border-left: 3px solid var(--inaccuracy); }
+.move-item.tag-miss       { border-left: 3px solid var(--miss); }
+.move-item.tag-blunder    { border-left: 3px solid var(--blunder); }
+
+
+/* ================= SHARE ACTIONS ================= */
+
+.share-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+}
+
+
+.share-actions button {
+
+    flex: 1;
+
+    padding: 12px;
+
+    font-size: 12px;
+
+}
+
+
+.share-btn {
+
+    background: var(--gold);
+
+    color: black;
+
+}
+
+
+.download-btn {
+
+    background: transparent;
+
+    color: var(--gold);
+
+    border: 1px solid var(--gold-dark);
+
+}
+
+
+.download-btn:hover {
+
+    background: var(--gold);
+
+    color: black;
+
+}
+
+
+/* ================= ABOUT ================= */
+
+.about-section {
+
+    background: #0d0d0d;
+
+}
+
+
+.about-section > p {
+
+    max-width: 700px;
+
+    margin: 20px auto 60px;
+
+    color: var(--grey);
+
+    line-height: 1.8;
+
+}
+
+
+.feature-container {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(230px, 1fr)
+        );
+
+    gap: 25px;
+
+    max-width: 1000px;
+
+    margin: auto;
+
+}
+
+
+.feature-card {
+
+    background: #141414;
+
+    border: 1px solid #292929;
+
+    padding: 35px 25px;
+
+    transition: 0.3s;
+
+}
+
+
+.feature-card:hover {
+
+    border-color: var(--gold);
+
+    transform: translateY(-5px);
+
+}
+
+
+.feature-icon {
+
+    font-size: 45px;
+
+    color: var(--gold);
+
+    margin-bottom: 15px;
+
+}
+
+
+.feature-card h3 {
+
+    font-family: "Cinzel", serif;
+
+    color: var(--gold);
+
+    margin-bottom: 15px;
+
+}
+
+
+.feature-card p {
+
+    color: var(--grey);
+
+    line-height: 1.6;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    background: #050505;
+
+    border-top: 1px solid var(--gold-dark);
+
+}
+
+
+.footer-logo {
+
+    font-family: "Cinzel", serif;
+
+    color: var(--gold);
+
+    font-size: 22px;
+
+    margin-bottom: 10px;
+
+}
+
+
+footer p {
+
+    color: var(--grey);
+
+}
+
+
+.copyright {
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+}
+
+
+/* ================= UTILITY ================= */
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .analysis-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .analysis-panel {
+
+        width: 100%;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 55px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+
+    .nav-links {
+
+        gap: 15px;
+
+        font-size: 13px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 42px;
+
+    }
+
+
+    .tagline {
+
+        letter-spacing: 2px;
+
+        font-size: 10px;
+
+    }
+
+
+    .username-box input {
+
+        width: 100%;
+
+    }
+
+
+    .username-box button {
+
+        width: 100%;
+
+    }
+
+
+    h2 {
+
+        font-size: 30px;
+
+    }
+
+
+    .chess-decoration {
+
+        font-size: 35px;
+
+        gap: 15px;
+
+    }
+
+
+    .nav-account {
+
+        gap: 8px;
+
+    }
+
+
+    #nav-username {
+
+        font-size: 11px;
+
+    }
+
+
+    .eval-bar {
+
+        height: 140px;
+
+    }
+
+}
+
+
+/* =========================================
+   AUTH OVERLAY (LOGIN / SIGN UP)
+========================================= */
+
+.auth-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #1a1607,
+            #050505 70%
+        );
+
+}
+
+
+.auth-overlay.hidden {
+
+    display: none;
+
+}
+
+
+.auth-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    background: var(--dark-card);
+
+    border: 1px solid var(--gold-dark);
+
+    padding: 45px 40px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+}
+
+
+.auth-crest {
+
+    font-size: 42px;
+
+    color: var(--gold);
+
+    margin-bottom: 10px;
+
+}
+
+
+.auth-title {
+
+    font-family: "Cinzel", serif;
+
+    font-size: 26px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.auth-title span {
+
+    color: var(--gold);
+
+}
+
+
+.auth-subtitle {
+
+    color: var(--grey);
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.auth-tabs {
+
+    display: flex;
+
+    border: 1px solid #292929;
+
+    margin-bottom: 28px;
+
+}
+
+
+.auth-tab {
+
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    padding: 12px;
+
+    color: var(--grey);
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+
+.auth-tab.active {
+
+    background: var(--gold);
+
+    color: black;
+
+}
+
+
+.auth-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+
+}
+
+
+.auth-form.hidden {
+
+    display: none;
+
+}
+
+
+.auth-form label {
+
+    font-size: 12px;
+
+    color: var(--grey);
+
+    margin-bottom: 6px;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.auth-form input {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 18px;
+
+    background: #0b0b0b;
+
+    border: 1px solid #292929;
+
+    color: var(--white);
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s;
+
+}
+
+
+.auth-form input:focus {
+
+    border-color: var(--gold);
+
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+
+}
+
+
+.auth-submit {
+
+    width: 100%;
+
+    margin-top: 4px;
+
+}
+
+
+.auth-guest {
+
+    width: 100%;
+
+    margin-top: 14px;
+
+    background: transparent;
+
+    border: 1px solid #333;
+
+    color: var(--grey);
+
+    font-weight: normal;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.auth-guest:hover {
+
+    border-color: var(--gold);
+
+    color: var(--gold);
+
+    background: transparent;
+
+}
+
+
+.auth-error {
+
+    color: #ff5c5c;
+
+    font-size: 13px;
+
+    margin: -8px 0 14px;
+
+    min-height: 16px;
+
+}
+
+
+.auth-note {
+
+    margin-top: 26px;
+
+    color: #6b6b6b;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   HISTORY SECTION
+========================================= */
+
+.history-section {
+
+    padding: 90px 8%;
+
+    text-align: center;
+
+    background: #0d0d0d;
+
+}
+
+.history-empty {
+
+    color: var(--grey);
+
+    max-width: 500px;
+
+    margin: 0 auto 20px;
+
+    padding: 30px;
+
+    border: 1px dashed #333;
+
+    font-size: 14px;
+
+}
+
+.history-empty.hidden {
+
+    display: none;
+
+}
+
+.history-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+.history-actions button {
+
+    flex: 1;
+
+    padding: 10px;
+
+    font-size: 11px;
+
+}
+
+.history-actions .delete-btn {
+
+    background: transparent;
+
+    border: 1px solid #5a2a2a;
+
+    color: #ff8080;
+
+}
+
+.history-actions .delete-btn:hover {
+
+    background: #5a2a2a;
+
+    color: white;
+
+}
+
+
+/* =========================================
+   ACCESSIBILITY: VISIBLE KEYBOARD FOCUS
+========================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.move-item:focus-visible {
+
+    outline: 2px solid var(--gold);
+
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior: auto;
+
+    }
+
+    *,
+    *::before,
+    *::after {
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .auth-card {
+
+        padding: 35px 25px;
+
+    }
+
+}
